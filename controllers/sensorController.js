@@ -24,7 +24,19 @@ const sensor_create_post = (req, res)=>{
     })
 }
 
+const sensor_graphs = (req, res)=>{
+    Sensor.find().sort({createdAt: -1})
+    .then((result)=>{
+        res.render('sensors/graphs', {title: 'All sensors', sensors:result});
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+
+}
+
 module.exports = {
     sensor_index,
-    sensor_create_post
+    sensor_create_post,
+    sensor_graphs
 }

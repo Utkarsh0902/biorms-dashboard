@@ -1,0 +1,58 @@
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+<body>
+    <%- include('../partials/nav.ejs')%>
+    <div class="sensors content">
+        <h2>Graphs for different readings</h2>
+        <%if (sensors.length>0) {%>
+            <% var count = sensors.length; %>
+            <% var tempData = []; %>
+            <% sensors.forEach(sensor=>{tempData.push(sensor.temp) } )%>
+            <div className="graph">
+                <canvas id="myChart"></canvas>
+            </div>
+
+
+        <%} else{%>
+            <p>No sensor values to show.</p>
+        <%}%>
+    </div>
+    <%-include('../partials/footer.ejs')  %> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script>
+        var index = <%=count%>;
+        console.log(index);
+        var data = [<%=tempData%>];
+        console.log(data);
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [...Array(index).keys()],
+            datasets: [{
+                label: 'Temperature values',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRation:false,
+            responsive:true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>
