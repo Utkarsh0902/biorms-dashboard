@@ -1,0 +1,42 @@
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+<body>
+    <%- include('../partials/nav.ejs')%>
+    <div class="sensors content">
+        <h2>All sensor readings</h2>
+        <%if (sensors.length>0) {%>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index no.</th>
+                        <th >Temperature</th>
+                        <th >Pressure</th>
+                        <th >pH</th>
+                        <th >Humidity</th>
+                        <th >Timestamp</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <%var index = sensors.length%> 
+                    <%sensors.forEach(sensor=>{%>
+                    <tr>
+                        <td><%=index%> </td>
+                        <% index--; %> 
+                        <td><%=sensor.temp%></td>
+                        <td><%=sensor.pressure%></td>
+                        <td><%=sensor.ph%></td>
+                        <td><%=sensor.humidity%></td>
+                        <td><%=sensor.createdAt%></td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        <%} else{%>
+            <p>No sensor values to show.</p>
+        <%}%>
+    </div>
+    <%-include('../partials/footer.ejs')  %> 
+    
+</body>
+</html>
