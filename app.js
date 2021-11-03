@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const sensorRoutes = require('./routes/sensorRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // connect to the database
 const dbURI = 'mongodb+srv://admin:test123@nodetuts.r2xr3.mongodb.net/biogas-rms?retryWrites=true&w=majority';
@@ -29,6 +30,8 @@ app.get('/', (req,res)=>{
 
 //sensor routes: through a middleware
 app.use('/sensors', sensorRoutes);
+//user routes: through a middleware
+app.use('/users', userRoutes);
 
 app.use((req, res)=>{
     // 404 page: The app.use() needs to be at the end of the other route handlers

@@ -1,5 +1,7 @@
 // sensor_index, sensor_details, sensor_create_get, sensor_create_post, sensor_delete
 const Sensor = require('../models/sensors');
+const axios = require('axios');
+const serverURL = "http://localhost:3000";
 
 // Setup to send email alerts
 var nodemailer = require('nodemailer');
@@ -52,23 +54,35 @@ const sensor_alert = (req, res)=>{
     const alert_value = req.body.value;
     const HTML_message = `<p>There is an alert from the biorms:</p> <p>Property: ${alert_property}</p> <p>Value: ${alert_value}</p>`;
     // Send an alert to the page
-    DOM.render(alert(HTML_message));
     // Alert through mail    
-    // set the email configurations
-    const mailOptions = {
-        from: 'biorms21@gmail.com', // sender address
-        to: 'f20180456@hyderabad.bits-pilani.ac.in', // list of receivers
-        subject: 'BIORMS ALERT!', // Subject line
-        html: HTML_message
-    };
-    transporter.sendMail(mailOptions, function (err, info) {
-        if(err)
-          console.log(err)
-        else{
-            console.log(info);
-        }
-          
-    });
+    //get all the emails
+    var emails ="";
+    axios({
+        method: 'GET',
+        url: serverURL+"/users/emails",
+    })
+    .then(userData=>{
+        userData.data.forEach(user=>{
+            emails+= " " + user.email.toString();
+        });
+
+        // set the email configurations
+        const mailOptions = {
+            from: 'biorms21@gmail.com', // sender address
+            to: emails, // list of receivers
+            subject: 'BIORMS ALERT!', // Subject line
+            html: HTML_message
+        };
+        transporter.sendMail(mailOptions, function (err, info) {
+            if(err)
+            console.log(err)
+            else{
+                console.log("Email sent");
+            }
+            
+        });
+    })
+    .catch(err=>console.log(err));
 
 }
 

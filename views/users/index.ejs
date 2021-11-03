@@ -1,0 +1,40 @@
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+<body>
+    <%- include('../partials/nav.ejs')%>
+    <div class="users content">
+        <h2>All user details</h2>
+        <%if (users.length>0) {%>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th >Type</th>
+                        <th >Email</th>
+                        <th >Ph. no.</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <%var index = 1;%> 
+                    <%users.forEach(user=>{%>
+                    <tr>
+                        <td><%=index%> </td>
+                        <% index++; %> 
+                        <td><%=user.name%></td>
+                        <td><%=user.type%></td>
+                        <td><%=user.email%></td>
+                        <td><%=user.phno%></td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        <%} else{%>
+            <p>No users to show.</p>
+        <%}%>
+    </div>
+    <%-include('../partials/footer.ejs')  %> 
+    
+</body>
+</html>
