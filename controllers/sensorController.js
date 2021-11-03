@@ -46,20 +46,26 @@ const sensor_graphs = (req, res)=>{
 }
 
 const sensor_alert = (req, res)=>{
-    // Alert through mail
-    console.log("Alert raised.")
+    console.log("Alert raised.");
+    
+    const alert_property = req.body.alert;
+    const alert_value = req.body.value;
+    const HTML_message = `<p>There is an alert from the biorms:</p> <p>Property: ${alert_property}</p> <p>Value: ${alert_value}</p>`;
+    // Send an alert to the page
+    DOM.render(alert(HTML_message));
+    // Alert through mail    
+    // set the email configurations
     const mailOptions = {
         from: 'biorms21@gmail.com', // sender address
         to: 'f20180456@hyderabad.bits-pilani.ac.in', // list of receivers
         subject: 'BIORMS ALERT!', // Subject line
-        html: '<p>There is an alert from the biorms!</p>'// plain text body
+        html: HTML_message
     };
     transporter.sendMail(mailOptions, function (err, info) {
         if(err)
           console.log(err)
         else{
             console.log(info);
-            res.redirect("/");
         }
           
     });
