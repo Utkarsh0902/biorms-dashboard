@@ -5,7 +5,9 @@ const User = require('../models/users');
 const user_index = (req, res)=>{
     User.find().sort({createdAt: -1})
     .then((result)=>{
-        res.render('users/index', {title: 'All users', users:result});
+        // res.render('users/index', {title: 'All users', users:result});
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.json(result);
     })
     .catch((err)=>{
         console.log(err);

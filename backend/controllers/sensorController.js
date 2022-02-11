@@ -1,7 +1,7 @@
 // sensor_index, sensor_details, sensor_create_get, sensor_create_post, sensor_delete
 const Sensor = require('../models/sensors');
 const axios = require('axios');
-const serverURL = "http://localhost:3000";
+const serverURL = "http://localhost:5000";
 
 // Setup to send email alerts
 var nodemailer = require('nodemailer');
@@ -16,7 +16,11 @@ var transporter = nodemailer.createTransport({
 const sensor_index = (req, res)=>{
     Sensor.find().sort({createdAt: -1})
     .then((result)=>{
-        res.render('sensors/index', {title: 'All sensors', sensors:result});
+        //res.render('sensors/index', {title: 'All sensors', sensors:result});
+        // to send the data as JSON
+        // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.json(result);
     })
     .catch((err)=>{
         console.log(err);

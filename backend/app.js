@@ -9,8 +9,8 @@ const dbURI = 'mongodb+srv://admin:test123@nodetuts.r2xr3.mongodb.net/biogas-rms
 mongoose.connect(dbURI)
 .then((result)=>{
     console.log("Connected to the database.");
-    //now listen for requests on port 3000
-    app.listen(3000);
+    //now listen for requests on port 5000
+    app.listen(5000);
 })
 .catch((err)=>{
     console.log(err);
@@ -25,6 +25,7 @@ app.use(express.static('public'));
 
 //Route handlers
 app.get('/', (req,res)=>{
+    // Website you wish to allow to connect
     res.redirect('/sensors');
 })
 
