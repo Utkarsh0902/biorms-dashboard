@@ -3,11 +3,13 @@ import Navbar from './components/navbar/Navbar';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Graphs from './components/graphs/Graphs';
 import User from './components/users/Users';
+import Sidebar from './components/sidebar/Sidebar';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="app" >
+        <Sidebar/>
         <Navbar/>
         <div className="content">
 

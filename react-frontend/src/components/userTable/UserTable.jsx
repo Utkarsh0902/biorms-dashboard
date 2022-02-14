@@ -1,5 +1,6 @@
 import React from 'react'
 
+import './userTable.css'
 const UserTable = ({users, title}) => {
   var index = 1;
   const userData = users.map(

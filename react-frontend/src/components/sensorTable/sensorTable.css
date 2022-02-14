@@ -1,0 +1,37 @@
+.sensor-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    font-family: sans-serif;
+    min-width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.sensor-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.sensor-table th,
+.sensor-table td {
+    padding: 12px 15px;
+}
+
+.sensor-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.sensor-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.sensor-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.sensor-table tbody tr:hover {
+    font-weight: bold;
+    border-color: #009879;
+    background-color: darkseagreen;
+}

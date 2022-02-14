@@ -1,3 +1,5 @@
+import './sensorTable.css'
+
 const SensorTable = ({sensors, title}) => {
     var index = sensors.length;
     const sensorData = sensors.map(
@@ -25,7 +27,7 @@ const SensorTable = ({sensors, title}) => {
                 <thead>
                     <tr>
                         <th>Index no.</th>
-                        <th >Temperature</th>
+                        <th >Temp</th>
                         <th >Pressure</th>
                         <th >pH</th>
                         <th >Humidity</th>
